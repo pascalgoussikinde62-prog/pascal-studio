@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123b70">
+  <meta name="description" content="Pascal Studio — gestion des clients, projets créatifs, campagnes et facturation.">
+  <title>Pascal Studio — Espace professionnel</title>
+  <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./site.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="./config.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <main id="auth-screen" class="auth-shell">
+    <section class="auth-brand">
+      <div class="brand-mark">PS</div>
+      <p class="eyebrow">ESPACE PROFESSIONNEL</p>
+      <h1>Vos projets créatifs.<br><span>Un seul espace.</span></h1>
+      <p class="muted-on-dark">Clients, campagnes, livrables et facturation réunis dans Pascal Studio.</p>
+      <div class="auth-points">
+        <div>✓ Suivi de vos prestations</div>
+        <div>✓ Gestion des clients et projets</div>
+        <div>✓ Vue claire sur les paiements</div>
+      </div>
+      <p class="auth-foot">Une plateforme indépendante pour votre activité digitale.</p>
+    </section>
+    <section class="auth-panel">
+      <div class="auth-mobile-logo"><div class="brand-mark">PS</div><strong>Pascal Studio</strong></div>
+      <p class="eyebrow">BIENVENUE</p>
+      <h2 id="auth-title">Connectez-vous</h2>
+      <p class="muted" id="auth-subtitle">Accédez à votre espace de gestion.</p>
+      <form id="auth-form">
+        <label for="auth-email">Adresse e-mail</label>
+        <input id="auth-email" type="email" autocomplete="email" placeholder="vous@exemple.com" required>
+        <label for="auth-password">Mot de passe</label>
+        <input id="auth-password" type="password" autocomplete="current-password" minlength="8" placeholder="8 caractères minimum" required>
+        <label id="auth-name-label" for="auth-name" class="hidden">Nom complet</label>
+        <input id="auth-name" class="hidden" type="text" autocomplete="name" placeholder="Votre nom">
+        <button id="auth-submit" class="btn btn-primary btn-full" type="submit">Se connecter</button>
+      </form>
+      <p class="auth-switch"><span id="auth-switch-text">Vous n’avez pas encore de compte ?</span> <button id="auth-switch" class="text-button" type="button">Créer un compte</button></p>
+      <p class="tiny muted">Vos données sont stockées dans votre propre projet Supabase, une fois la configuration terminée.</p>
+    </section>
+  </main>
+
+  <div id="app-shell" class="app-shell hidden">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-brand"><div class="brand-mark small">PS</div><div><strong>Pascal Studio</strong><small>GESTION DIGITALE</small></div></div>
+      <nav class="nav-list" aria-label="Navigation principale">
+        <button class="nav-item active" data-view="dashboard"><span>▦</span> Tableau de bord</button>
+        <button class="nav-item" data-view="clients"><span>♙</span> Clients</button>
+        <button class="nav-item" data-view="projects"><span>▣</span> Projets & prestations</button>
+        <button class="nav-item" data-view="campaigns"><span>↗</span> Campagnes Ads</button>
+        <button class="nav-item" data-view="invoices"><span>▤</span> Devis & factures</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="profile-mini"><div class="avatar" id="user-avatar">PS</div><div class="profile-copy"><strong id="user-name">Mon espace</strong><small id="user-email">Compte connecté</small></div></div>
+        <button id="signout-btn" class="nav-item signout"><span>↪</span> Déconnexion</button>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button id="mobile-menu" class="icon-button" aria-label="Ouvrir le menu">☰</button>
+        <div><p class="eyebrow" id="today-label">VOTRE ACTIVITÉ</p><h1 id="page-title">Tableau de bord</h1></div>
+        <div class="topbar-actions"><span class="connection-pill"><i></i> Espace privé</span><button id="quick-add" class="btn btn-primary">＋ Nouveau</button></div>
+      </header>
+      <section id="view-container" class="view-container" aria-live="polite">
+        <div class="loading-card">Chargement de votre espace…</div>
+      </section>
+      <footer class="app-footer">Pascal Studio <span>•</span> Vos données, votre activité.</footer>
+    </main>
+  </div>
+
+  <dialog id="record-dialog" class="record-dialog">
+    <form id="record-form" method="dialog">
+      <div class="dialog-head"><div><p class="eyebrow">PAScal STUDIO</p><h2 id="dialog-title">Ajouter un élément</h2></div><button id="dialog-close" class="icon-button" type="button" aria-label="Fermer">×</button></div>
+      <div id="dialog-fields" class="form-grid"></div>
+      <div class="dialog-actions"><button class="btn btn-secondary" id="cancel-dialog" type="button">Annuler</button><button class="btn btn-primary" id="save-record" type="submit">Enregistrer</button></div>
+    </form>
+  </dialog>
+</body>
+</html>
